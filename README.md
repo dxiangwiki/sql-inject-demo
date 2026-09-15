@@ -24,3 +24,18 @@ CREATE TABLE IF NOT EXISTS user(
     password VARCHAR(50)
 );
 INSERT INTO user(username,password) VALUES ('admin','123456');
+```
+3. 安装依赖
+```bash
+npm i express mysql
+```
+4. 修改 `server.js` 中MySQL账号密码，适配你本地数据库
+5. 启动服务
+```bash
+node server.js
+```
+访问：[http://localhost:3486](http://localhost:3486)
+
+## 测试Payload
+- `admin' -- ` 用户名框输入，绕过密码校验
+- `' OR '1'='1 -- ` 永真条件注入 
