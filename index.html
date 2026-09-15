@@ -146,7 +146,7 @@
             // 把拼出来的字符串 eval 成一个 where 条件判断
             let loginOk = false;
             try {
-                // 构造一个伪"SQL执行"：判断拼接后的条件是否为真
+                // 构造一个伪"SQL执行"：判断拼接后的条件是否为真 
                 // 这里用Function模拟执行拼接后的WHERE子句
                 const whereClause = sql.match(/WHERE (.+?)(;|$)/i)[1];
                 // 把 SQL 语法转成 JS 判断：username='xxx' -> username==='xxx'，password='xxx' -> password==='xxx'
