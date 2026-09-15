@@ -151,11 +151,13 @@
                 const whereClause = sql.match(/WHERE (.+?)(;|$)/i)[1];
                 // 把 SQL 语法转成 JS 判断：username='xxx' -> username==='xxx'，password='xxx' -> password==='xxx'
                 // 为了演示，直接用正则匹配常见注入模式
-                let jsCond = whereClause
-                    .replace(/username\s*=\s*'([^']*)'/gi, "username==='$1'")
-                    .replace(/password\s*=\s*'([^']*)'/gi, "password==='$1'")
-                    .replace(/'1'\s*=\s*'1'/gi, "true")
-                    .replace(/--.*$/g, "");
+       let jsCond = whereClause
+    .replace(/username\s*=\s*'([^']*)'/gi, "username==='$1'")
+    .replace(/password\s*=\s*'([^']*)'/gi, "password==='$1'")
+    .replace(/\sAND\s/gi, " && ")   // 新增这一行！把SQL AND转为JS &&
+    .replace(/'1'\s*=\s*'1'/gi, "true")
+    .replace(/--.*$/g, "");
+
 
                 // 对每条用户记录判断条件
                 for(const user of realUsers){
